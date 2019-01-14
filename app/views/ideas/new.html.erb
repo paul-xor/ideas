@@ -1,5 +1,13 @@
 <h1>Create an idea</h1>
 
+<% if @idea.errors.any? %>
+    <ul>
+        <% @idea.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
+
 <%= form_for @idea do |f|%>
     <p>
     <%= f.label :titile %>
