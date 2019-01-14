@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
-    
+    before_action :set_idea, only:[:edit, :show, :update, :destroy]
+
     def index
         @ideas = Idea.all
     end
@@ -19,15 +20,15 @@ class IdeasController < ApplicationController
     end
 
     def show
-        @idea = Idea.find(params[:id])
+        
     end
 
     def edit
-        @idea = Idea.find(params[:id])
+        
     end
 
     def update
-        @idea = Idea.find(params[:id])
+        
         if @idea.update(idea_params)
             flash[:notice] = "Idea updated successfully"
             redirect_to idea_path(@idea)
@@ -37,7 +38,7 @@ class IdeasController < ApplicationController
     end
 
     def destroy
-        @idea = Idea.find(params[:id])
+        
         @idea.destroy
 
         flash[:notice] = "Idea was successfully destroyed"
@@ -45,6 +46,10 @@ class IdeasController < ApplicationController
     end
 
     private
+    def set_idea
+        @idea = Idea.find(params[:id])
+    end
+
     def idea_params
         params.require(:idea).permit(:title, :description)
     end
