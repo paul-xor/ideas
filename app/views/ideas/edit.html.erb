@@ -1,5 +1,4 @@
-<h1>Create an idea</h1>
-
+<h1>Edit existing Idea</h1>
 <% if @idea.errors.any? %>
     <ul>
         <% @idea.errors.full_messages.each do |msg| %>
@@ -24,5 +23,3 @@
     <%= f.submit %>
     </p>
 <% end %>
-
-<%= link_to 'Back', ideas_path %>

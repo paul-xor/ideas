@@ -1,0 +1,18 @@
+<h1>Listing Ideas</h1>
+
+<%= link_to 'Create new Idea', new_idea_path %>
+<table>
+    <tr>
+        <th>Title:</th>
+        <th>Description:</th>
+    </tr>
+    <% @ideas.each do |idea| %>
+        <tr>
+            <td><%= idea.title %></td>
+            <td><%= idea.description %></td>
+            <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+            <td><%= link_to 'Show', idea_path(idea) %></td>
+
+        </tr>
+    <% end %>
+</table>
