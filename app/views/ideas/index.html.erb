@@ -12,7 +12,8 @@
             <td><%= idea.description %></td>
             <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
             <td><%= link_to 'Show', idea_path(idea) %></td>
-
+            <td><%= link_to 'Delete', idea_path(idea), method: :delete,
+            data: { confirm: "Are you sure?"} %></td>
         </tr>
     <% end %>
 </table>

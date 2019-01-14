@@ -36,6 +36,14 @@ class IdeasController < ApplicationController
         end
     end
 
+    def destroy
+        @idea = Idea.find(params[:id])
+        @idea.destroy
+
+        flash[:notice] = "Idea was successfully destroyed"
+        redirect_to ideas_path
+    end
+
     private
     def idea_params
         params.require(:idea).permit(:title, :description)
