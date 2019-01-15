@@ -6,3 +6,40 @@ Title: <%= @idea.title %>
 Description: <%= @idea.description %>
 </p>
 
+<%# ========== REVIEWS GOES HERE: ============= %>
+
+<%= form_with(model: @review, url: [@idea, @review], local: true) do |f| %>
+        <%# Errors loop should be here!%> 
+        
+        <h4 ><strong>Your Review:</strong></h4>
+
+        <div align='center'>
+            <%= f.text_area(
+            :body,
+            cols: 100,
+            rows: 5,
+            placeholder: "What are your thoughts?"
+            ) %>
+        </div>
+            <%= f.submit "Submit Review" %>
+    <% end %>
+
+    <ul>
+        <% @reviews.each do |review| %>
+            <li>
+            <p>
+                <%= review.body %> <br>
+                <small>
+                <%= link_to(
+                    "Delete",
+                    idea_review_path(@idea.id, review.id),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" }
+                ) %>
+                </small>
+                
+                <small>reviewed <%= time_ago_in_words(review.created_at) %> ago</small>
+            </p>
+            </li>
+        <% end %>
+    </ul>
