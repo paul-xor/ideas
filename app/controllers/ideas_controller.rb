@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
     before_action :set_idea, only:[:edit, :show, :update, :destroy]
+    before_action :require_user, except: [:index, :show]
+    before_action :require_same_user, only: [:edit, :update, :destroy]
 
     def index
         @ideas = Idea.all
@@ -10,7 +12,7 @@ class IdeasController < ApplicationController
     end
     def create
         @idea = Idea.new(idea_params)
-        # @idea.user = current_user
+        @idea.user = current_user
         if @idea.save
             flash[:success] = "Idea was successfully created"
             redirect_to idea_path(@idea)
@@ -54,4 +56,10 @@ class IdeasController < ApplicationController
         params.require(:idea).permit(:title, :description)
     end
     
+    def require_same_user
+        if current_user != @idea.user
+            flash[:danger] = "You can edit/delete only your own ideas"
+            redirect_to ideas_path
+        end
+    end
 end
