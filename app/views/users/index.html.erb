@@ -1,0 +1,7 @@
+<h1 align='center' >All Users</h1>
+
+<% @users.each do |user| %>
+    <ul>
+        <%= link_to user.username, user_path(user) %>
+    </ul>
+<% end %>
